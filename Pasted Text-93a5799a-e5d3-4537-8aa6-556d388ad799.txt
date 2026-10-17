@@ -2554,32 +2554,25 @@ task.spawn(function()
 end)
 
 pcall(function()
-table.insert(
-    v49,
-    game:BindToClose(function()
-        if v324.enabled then
-            pcall(fn82)
-            task.wait(0.3)
-        end
-    end)
-)
-
-
--- ============================================================
---
+    table.insert(
+        v49,
+        game:BindToClose(function()
+            if v324.enabled then
+                pcall(fn82)
+                task.wait(0.3)
+            end
+        end)
+    )
+end)
 
 -- Unlocks
-pcall(function()
-    -- tab lock skipped
-end)
-end)
 local v418 = {
-rarity = "Secret",
-searchText = "",
-sword = nil,
-swordDropdown = nil,
-rarityDropdown = nil,
-searchInput = nil,
+    rarity = "Secret",
+    searchText = "",
+    sword = nil,
+    swordDropdown = nil,
+    rarityDropdown = nil,
+    searchInput = nil,
 }
 local v419 = false
 local fn91
@@ -2766,16 +2759,6 @@ end
 task.spawn(function()
     local v455, v456 = pcall(function()
         local v457 = fn92()
-        if v421 then
-            pcall(function()
-                pcall(function() end)
-            end)
-        end
-        if v420 then
-            pcall(function()
-                pcall(function() end)
-            end)
-        end
         v419 = true
         fn93()
         fn91()
@@ -2810,19 +2793,17 @@ tabMovement:Slider("Jump Power", 50, 300, 60, function(p160)
 tabMovement:Toggle("Infinite Jump", false, function(p161)
         v39.infJump = p161
     end)
+
 pcall(function()
-fn9(UserInputService.JumpRequest:Connect(function()
-    if v39.infJump then
-        local v458 = fn11()
-        if v458 then
-            v458:ChangeState(Enum.HumanoidStateType.Jumping)
+    fn9(UserInputService.JumpRequest:Connect(function()
+        if v39.infJump then
+            local v458 = fn11()
+            if v458 then
+                v458:ChangeState(Enum.HumanoidStateType.Jumping)
+            end
         end
-    end
-end))
-
-
--- ============================================================
---
+    end))
+end)
 
 -- Misc
 tabMisc:Toggle("Anti AFK", false, function(p162)
@@ -2980,7 +2961,11 @@ if not v4.available then
 end
 pcall(function()
     if v315 and type(v315.Boot) == "function" then
-        v315:Boot({ "loading tempo hub", "wiring parry", "ready" })
+        v315:Boot({ "loading tempo hub", "wiring parry", "ready" }, function()
+            if type(v315.Show) == "function" then v315:Show() end
+        end)
+    elseif type(v315.Show) == "function" then
+        v315:Show()
     end
 end)
 fn13("TempoHub", "Loaded. V.0.2.0259 ")
